@@ -18,10 +18,15 @@
         <item name="colorButtonNormal">@color/primary_darker</item>
     </style>
 
-    <style name="AppTheme.Dark.Dialog" parent="Theme.AppCompat.Dialog">
-        <item name="colorAccent">@color/white</item>
-        <item name="android:textColorPrimary">@color/iron</item>
-        <item name="android:background">@color/primary</item>
+    <!--<style name="AppTheme.Dark.Dialog" parent="Theme.AppCompat.Dialog">-->
+        <!--<item name="colorAccent">@color/white</item>-->
+        <!--<item name="android:textColorPrimary">@color/iron</item>-->
+        <!--<item name="android:background">@color/primary</item>-->
+    <!--</style>-->
+    <style name="AppCompatAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">#FFCC00</item>
+        <!--<item name="android:textColorPrimary">#5fa3d0</item>-->
+        <item name="android:background">#FFFFFF</item>
     </style>
 
-</resources>
+    </resources>
