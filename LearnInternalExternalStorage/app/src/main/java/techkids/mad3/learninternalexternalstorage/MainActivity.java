@@ -1,5 +1,6 @@
 package techkids.mad3.learninternalexternalstorage;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +17,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initComponent();
+        openJsonService();
     }
 
     private void initComponent() {
@@ -23,6 +25,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         editTextPassword = (EditText) this.findViewById(R.id.editTextPassword);
         btnLogin = (Button) this.findViewById(R.id.btn_login);
         btnLogin.setOnClickListener(this);
+    }
+
+    private void openJsonService()
+    {
+        Intent intent = new Intent(this, JsonService.class);
+        startService(intent);
     }
 
     @Override
