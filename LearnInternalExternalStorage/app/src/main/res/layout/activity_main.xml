@@ -19,7 +19,7 @@
             android:layout_gravity="center_horizontal" />
 
         <!-- Email Label -->
-        <EditText android:id="@+id/input_email"
+        <EditText android:id="@+id/editTextMail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColorHighlight="@color/white"
@@ -31,7 +31,7 @@
 
 
         <!-- Password Label -->
-        <EditText android:id="@+id/input_password"
+        <EditText android:id="@+id/editTextPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColorHint="@color/iron"
