@@ -15,3 +15,6 @@ Nhiệm vụ của ta là đọc cái json đó. Nếu login đéo đc thì báo
 ##Môi trường phát triển
 + Bộ công cụ Android Studio 2.1
 + Máy ảo Genymotion dùng api min 17 và api max 23
+
+##Tham khảo
++ [Tham khảo ví dụ thiết kế giao diện kiểu Masterial Login](sourcey.com/beautiful-android-login-and-signup-screens-with-material-design/)
