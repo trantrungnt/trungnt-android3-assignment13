@@ -18,7 +18,7 @@ import java.net.URL;
  */
 public class JsonService extends IntentService {
     private String login_status, login_message, link;
-    private Bundle bundleGetData;
+    private Bundle bundleGetData, bundlePutData;
     private String email, password;
 
     public JsonService() {
@@ -34,6 +34,7 @@ public class JsonService extends IntentService {
 
         try{
             url = new URL("http://g-service.herokuapp.com/api/techkids/login?username="+ email + "&password=" + password);
+
             InputStreamReader reader = new InputStreamReader(url.openStream(),"UTF-8");
             char[] buff = new char[64];
             StringBuilder x = new StringBuilder();
@@ -47,19 +48,21 @@ public class JsonService extends IntentService {
             login_status = resultObject.getString("login_status");
             login_message = resultObject.getString("login_message");
 
-            switch (login_status)
-            {
-                case "0":
-                        //Mo thong bao cho nguoi dung khong dang nhap duoc
-                        //intent = new
-                    break;
-                case "1":
-                    break;
+            intent = new Intent();
+            bundlePutData = new Bundle();
+
+            bundlePutData.putString("login_status", login_status);
+            bundlePutData.putString("login_message", login_message);
+
+            if (login_status == "1") {
+                link = resultObject.getString("link");
+                bundlePutData.putString("link", link);
             }
 
-//            String link = resultObject.getString("link");
+            intent.putExtra("Login_result", bundlePutData);
 
-            Log.d("Json cua Hung day ak? ", result);
+            intent.setAction("FILTER_ACTION_LOGIN");
+            sendBroadcast(intent);
 
         } catch (Exception e) {
             System.out.println(e.toString());

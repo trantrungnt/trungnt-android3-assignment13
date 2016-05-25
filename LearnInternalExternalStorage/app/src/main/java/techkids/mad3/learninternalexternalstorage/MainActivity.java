@@ -1,8 +1,11 @@
 package techkids.mad3.learninternalexternalstorage;
 
 import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,18 +13,56 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+//http://iliat.org/download.txt
+//user: android%40hungdepzai.techkids.vn, pass: 123456
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private EditText editTextEmail, editTextPassword;
     private Button btnLogin;
     private Bundle getBundleData, bundleData;
     private Intent getIntentData, intentData;
-    private String email, password;
+    private String email, password, login_status, login_message;
+    private BroadcastReceiver broadcastReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initComponent();
+    }
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+
+        listenBroadRececive();
+    }
+
+    private void listenBroadRececive()
+    {
+        getIntentData = new Intent();
+
+        broadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                getBundleData = intent.getBundleExtra("Login_result");
+                login_status = getBundleData.getString("login_status");
+                login_message =  getBundleData.getString("login_message");
+
+              switch (login_status) {
+                  case "0":
+                      showAlertDialog("WARNING ...", login_message);
+                      break;
+
+                  case "1":
+                      showAlertDialog("INFORMATION ...", login_message);
+                      break;
+              }
+            }
+        };
+
+        registerReceiver(broadcastReceiver, new IntentFilter("FILTER_ACTION_LOGIN"));
     }
 
     private void initComponent() {
@@ -46,7 +87,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             intentData.putExtras(bundleData);
             startService(intentData);
         }
-
     }
 
     private void showAlertDialog (String titleDialog, String contentDialog)
