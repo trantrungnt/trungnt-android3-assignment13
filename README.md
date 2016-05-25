@@ -29,3 +29,4 @@ Nhiệm vụ của ta là đọc cái json đó. Nếu login đéo đc thì báo
 + [Storage situation internal storage](https://commonsware.com/blog/2014/04/07/storage-situation-internal-storage.html)
 + [How to Correctly Store App-Specific Files in Android](http://www.grokkingandroid.com/how-to-correctly-store-app-specific-files-in-android/)
 + [How can I read file in Android](How can I read a text file in Android?)
++ [Read and Write File text in Android - Example](http://www.androidinterview.com/android-internal-storage-read-and-write-text-file-example/)
