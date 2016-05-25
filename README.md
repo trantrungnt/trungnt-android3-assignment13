@@ -25,3 +25,4 @@ Nhiệm vụ của ta là đọc cái json đó. Nếu login đéo đc thì báo
 + [Internal Storage in Android](http://www.tutorialspoint.com/android/android_internal_storage.htm)
 + [SharePrefrerences](https://developer.android.com/guide/topics/data/data-storage.html)
 + [Internal Storage Data in Android - Example](http://www.journaldev.com/9383/android-internal-storage-example-tutorial)
++ [File Path for Android when using Emulator](stackoverflow.com/questions/10703619/file-path-for-android-when-using-emulator)
