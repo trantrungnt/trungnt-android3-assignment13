@@ -11,6 +11,7 @@ Nhiệm vụ của ta là đọc cái json đó. Nếu login đéo đc thì báo
 
 ##Kiến thức để làm được bài
 + [Xem tại đây](https://github.com/trantrungnt/LearnStorargeData)
++ [Học sử dụng ADB, cấu hình để xem thư mục Package trong máy ảo Genymotion](https://youtu.be/-Gcm6Zzauh8)
 
 ##Môi trường phát triển
 + Bộ công cụ Android Studio 2.1
