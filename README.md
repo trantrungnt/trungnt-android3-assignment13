@@ -19,5 +19,6 @@ Nhiệm vụ của ta là đọc cái json đó. Nếu login đéo đc thì báo
 ##Tham khảo
 + [Tham khảo ví dụ thiết kế giao diện kiểu Masterial Login](sourcey.com/beautiful-android-login-and-signup-screens-with-material-design/)
 + [Alert Dialog uses Master Design](http://www.androidmaterial.info/2016/01/android-alertdialog-example-tutorial-in-material-design/)
++ [Example getFileDir](http://www.programcreek.com/java-api-examples/index.php?class=android.content.Context&method=getFilesDir)
 + [Data Storage in Android (basic)](https://developer.android.com/training/basics/data-storage/files.html)
 + [Saving Data in your app Android](http://blog.cindypotvin.com/saving-data-to-a-file-in-your-android-application/)
