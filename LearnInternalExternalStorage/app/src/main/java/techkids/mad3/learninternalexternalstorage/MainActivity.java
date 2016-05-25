@@ -13,6 +13,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.io.File;
+import java.io.FileOutputStream;
+
 //http://iliat.org/download.txt
 //user: android%40hungdepzai.techkids.vn, pass: 123456
 
@@ -23,6 +26,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Intent getIntentData, intentData;
     private String email, password, login_status, login_message;
     private BroadcastReceiver broadcastReceiver;
+    private String storageMyAccount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +61,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                   case "1":
                       showAlertDialog("INFORMATION ...", login_message);
+                      storageAccount(context , "MyAccount.txt", email, password);
+
                       break;
               }
             }
@@ -104,5 +110,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
 
         builder.show();
+    }
+
+    private void storageAccount(Context context, String filename, String email, String password)
+    {
+        File file;
+        FileOutputStream outputStream;
+        //Log.d("helloooo", context.getFilesDir().getPath());
+
+        try {
+            file = new File(context.getFilesDir(), filename);
+
+            outputStream = openFileOutput(filename , Context.MODE_PRIVATE);
+            outputStream.write(email.getBytes());
+            outputStream.write("\n".getBytes());
+            outputStream.write(password.getBytes());
+            outputStream.close();
+
+            Log.d("helloooo", file.getAbsolutePath());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 }
