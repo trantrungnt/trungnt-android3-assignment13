@@ -38,6 +38,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.v("level 1", "aa");
+        Log.d("level 1", "bb");
+        Log.i("level 1", "cc");
+        Log.e("level 1", "dd");
+
         setContentView(R.layout.activity_main);
         initComponent();
     }
@@ -63,12 +68,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
               switch (login_status) {
                   case "0":
-                      showAlertDialog("WARNING ...", login_message);
+                      showAlertDialog("          WARNING ...", login_message);
                       break;
 
                   case "1":
                       showAlertDialog("INFORMATION ...", login_message);
-                      //storageAccount(context , "MyAccount.txt", email, password);
+                      storageAccount(context , "MyAccount.txt", email, password);
                       String myFileName = "MyAccount.txt";
                       readFile(myFileName);
 //                      for (String name: context.fileList()
@@ -136,6 +141,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         try {
             outputStream = openFileOutput(file.getAbsoluteFile().toString(), Context.MODE_PRIVATE);
             outputStream.write(email.getBytes());
+            outputStream.write("-".getBytes());
             outputStream.write(password.getBytes());
             outputStream.close();
         } catch (Exception e) {
