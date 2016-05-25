@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.Uri;
+import android.support.annotation.RequiresPermission;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,7 +16,11 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+
 
 //http://iliat.org/download.txt
 //user: android%40hungdepzai.techkids.vn, pass: 123456
@@ -27,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private String email, password, login_status, login_message;
     private BroadcastReceiver broadcastReceiver;
     private String storageMyAccount;
+    private static final int READ_BLOCK_SIZE = 100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +68,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                   case "1":
                       showAlertDialog("INFORMATION ...", login_message);
-                      storageAccount(context , "MyAccount.txt", email, password);
+                      //storageAccount(context , "MyAccount.txt", email, password);
+                      String myFileName = "MyAccount.txt";
+                      readFile(myFileName);
+//                      for (String name: context.fileList()
+//                           ) {
+//                          Log.d("List File:", name);
+//                      }
 
                       break;
               }
@@ -115,22 +128,43 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void storageAccount(Context context, String filename, String email, String password)
     {
         File file;
+        file = new File(context.getFilesDir(), filename);
+        //Log.d("File gi day: ", file.getAbsoluteFile().toString());
+
         FileOutputStream outputStream;
-        //Log.d("helloooo", context.getFilesDir().getPath());
 
         try {
-            file = new File(context.getFilesDir(), filename);
-
-            outputStream = openFileOutput(filename , Context.MODE_PRIVATE);
+            outputStream = openFileOutput(file.getAbsoluteFile().toString(), Context.MODE_PRIVATE);
             outputStream.write(email.getBytes());
-            outputStream.write("\n".getBytes());
             outputStream.write(password.getBytes());
             outputStream.close();
-
-            Log.d("helloooo", file.getAbsolutePath());
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
 
+    private void readFile(String filename)
+    {
+        //reading text from file
+        try {
+            FileInputStream fileIn = openFileInput(filename);
+            InputStreamReader InputRead= new InputStreamReader(fileIn);
+
+            char[] inputBuffer= new char[READ_BLOCK_SIZE];
+            String s="";
+            int charRead;
+
+            while ((charRead=InputRead.read(inputBuffer))>0) {
+                // char to string conversion
+                String readstring=String.copyValueOf(inputBuffer,0,charRead);
+                s +=readstring;
+            }
+            InputRead.close();
+
+            Log.d("Read my file:", s);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
+
