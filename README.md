@@ -23,3 +23,4 @@ Nhiệm vụ của ta là đọc cái json đó. Nếu login đéo đc thì báo
 + [Data Storage in Android (basic)](https://developer.android.com/training/basics/data-storage/files.html)
 + [Saving Data in your app Android](http://blog.cindypotvin.com/saving-data-to-a-file-in-your-android-application/)
 + [Internal Storage in Android](http://www.tutorialspoint.com/android/android_internal_storage.htm)
++ [SharePrefrerences](https://developer.android.com/guide/topics/data/data-storage.html)
