@@ -7,9 +7,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.net.Uri;
-import android.preference.PreferenceManager;
-import android.support.annotation.RequiresPermission;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,13 +18,12 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 
 
 //http://iliat.org/download.txt
 //user: android%40hungdepzai.techkids.vn, pass: 123456
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private EditText editTextEmail, editTextPassword;
     private Button btnLogin;
     private Bundle getBundleData, bundleData;
@@ -45,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Log.i("level 1", "cc");
         Log.e("level 1", "dd");
 
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
         initComponent();
     }
 
@@ -102,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         password = editTextPassword.getText().toString();
 
         if (id == R.id.btn_login) {
-            intentData = new Intent(MainActivity.this, JsonService.class);
+            intentData = new Intent(LoginActivity.this, JsonService.class);
             bundleData = new Bundle();
             bundleData.putString("Email", email);
             bundleData.putString("Password", password);
