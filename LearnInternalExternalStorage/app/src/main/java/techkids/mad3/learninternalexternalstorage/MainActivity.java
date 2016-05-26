@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                   case "1":
                       showAlertDialog("INFORMATION ...", login_message);
-
+                      saveMyAccountSharePreferences(context, "MyAccountPrivate", email, password);
 
                       break;
               }
