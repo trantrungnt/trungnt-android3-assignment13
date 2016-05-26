@@ -6,7 +6,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.net.Uri;
+import android.preference.PreferenceManager;
 import android.support.annotation.RequiresPermission;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -32,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Intent getIntentData, intentData;
     private String email, password, login_status, login_message;
     private BroadcastReceiver broadcastReceiver;
-    private String storageMyAccount;
+    private static final String storageMyAccount = "STORAGE_ACCOUNT";
     private static final int READ_BLOCK_SIZE = 100;
 
     @Override
@@ -73,13 +75,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                   case "1":
                       showAlertDialog("INFORMATION ...", login_message);
-                      storageAccount(context , "MyAccount.txt", email, password);
-                      String myFileName = "MyAccount.txt";
-                      readFile(myFileName);
-//                      for (String name: context.fileList()
-//                           ) {
-//                          Log.d("List File:", name);
-//                      }
+
 
                       break;
               }
@@ -171,6 +167,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+    }
+
+    private void saveMyAccountSharePreferences(Context context, String fileName, String email, String password)
+    {
+        SharedPreferences.Editor editor;
+
+        SharedPreferences sharedPreferences = context.getSharedPreferences(fileName, Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+        editor.putString("email", email);
+        editor.putString("password", password);
+        editor.commit();
     }
 }
 
