@@ -75,7 +75,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                   case "1":
                       showAlertDialog("INFORMATION ...", login_message);
-                      saveMyAccountSharePreferences(context, "MyAccountPrivate", email, password);
+                      //saveMyAccountSharePreferences(context, "MyAccountPrivate", email, password);
+                      String path = "/data/data/" + getPackageName() +  "/shared_prefs/" + "MyAccountPrivate.xml";
+                      Log.d("text", String.valueOf(isFileExist(path)));
 
                       break;
               }
@@ -179,6 +181,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         editor.putString("email", email);
         editor.putString("password", password);
         editor.commit();
+    }
+
+    private boolean isFileExist(String path)
+    {
+        boolean check=false;
+        File file = new File(path);
+        if (file.exists())
+            check = true;
+
+        return check;
     }
 }
 
