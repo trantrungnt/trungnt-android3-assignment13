@@ -36,3 +36,4 @@ Nhiệm vụ của ta là đọc cái json đó. Nếu login đéo đc thì báo
 + [How can I read file in Android](How can I read a text file in Android?)
 + [Read and Write File text in Android - Example](http://www.androidinterview.com/android-internal-storage-read-and-write-text-file-example/)
 + [Android shared preferences Turtorial](http://www.tutorialspoint.com/android/android_shared_preferences.htm)
++ [Share Preferences - Example](http://androidopentutorials.com/android-sharedpreferences-tutorial-and-example/)
