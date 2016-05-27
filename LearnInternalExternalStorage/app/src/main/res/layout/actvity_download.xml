@@ -5,7 +5,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/tvDislplayAuthor"
+        android:id="@+id/tvDislplayMyAccount"
         android:layout_marginTop="15dp"
         android:layout_marginRight="10dp"
         android:layout_alignParentRight="true"
@@ -15,21 +15,22 @@
         android:layout_height="wrap_content" />
 
     <ImageView android:src="@drawable/trungnt"
-        android:layout_below="@id/tvDislplayAccountName"
-        android:layout_marginTop="50dp"
+        android:id="@+id/imgDisplay"
+        android:layout_below="@id/tvDislplayMyAccount"
+        android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="150dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="10dp"
         android:layout_gravity="center_horizontal" />
 
     <EditText android:id="@+id/editDownloadMusic"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="170dp"
+        android:layout_marginTop="3dp"
         android:layout_width="200dp"
         android:layout_height="50dp"
-        android:layout_below="@id/tvDislplayAuthor"
+        android:layout_below="@id/imgDisplay"
         android:textColorHighlight="@color/white"
         android:textColor="@color/white"
         android:textColorHint="@color/iron"
@@ -40,11 +41,11 @@
 
     <Button
         android:id="@+id/btn_download_music"
-        android:layout_below="@id/tvDislplayAuthor"
+        android:layout_below="@id/imgDisplay"
         android:layout_toRightOf="@id/editDownloadMusic"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="170dp"
+        android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginBottom="24dp"
         android:textColor="@color/white"
@@ -72,7 +73,7 @@
         android:layout_toRightOf="@id/editDownloadPicture"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginBottom="24dp"
         android:textColor="@color/white"
