@@ -37,3 +37,4 @@ Nhiệm vụ của ta là đọc cái json đó. Nếu login đéo đc thì báo
 + [Read and Write File text in Android - Example](http://www.androidinterview.com/android-internal-storage-read-and-write-text-file-example/)
 + [Android shared preferences Turtorial](http://www.tutorialspoint.com/android/android_shared_preferences.htm)
 + [Share Preferences - Example](http://androidopentutorials.com/android-sharedpreferences-tutorial-and-example/)
++ [Android temporarily writing and read files to cache directory](http://wptrafficanalyzer.in/blog/android-temporarily-writing-and-reading-files-to-cache-directory/)
