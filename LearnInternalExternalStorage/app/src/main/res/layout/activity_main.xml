@@ -4,6 +4,17 @@
     android:background="@color/primary"
     android:layout_height="match_parent">
 
+
+    <TextView
+        android:id="@+id/tvDislplayAccountName"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="10dp"
+        android:layout_gravity="end"
+        android:textColor="@color/iron"
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
     <ImageView android:src="@drawable/logo"
         android:layout_width="300dp"
         android:layout_height="200dp"

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import java.io.File;
 
@@ -17,6 +18,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Intent intentAction;
     private String path, email;
     private SharedPreferences sharedPreferences;
+    private TextView tvDisplayMyAccount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         btnLogin.setOnClickListener(this);
         btnDownload.setOnClickListener(this);
+
+        tvDisplayMyAccount = (TextView) this.findViewById(R.id.tvDislplayAccountName);
     }
 
 
@@ -76,6 +80,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         {
             sharedPreferences = getSharedPreferences(Helper.fileName, MODE_PRIVATE);
             email = sharedPreferences.getString("email", null);
+            tvDisplayMyAccount.setText(email);
+            btnDownload.setVisibility(View.VISIBLE);
+            btnLogin.setVisibility(View.GONE);
         }
     }
 }
