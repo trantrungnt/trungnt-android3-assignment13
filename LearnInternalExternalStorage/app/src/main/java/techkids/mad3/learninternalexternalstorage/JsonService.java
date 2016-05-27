@@ -47,17 +47,18 @@ public class JsonService extends IntentService {
             JSONObject resultObject = new JSONObject(result);
             login_status = resultObject.getString("login_status");
             login_message = resultObject.getString("login_message");
+            link = resultObject.getString("link");
 
             intent = new Intent();
             bundlePutData = new Bundle();
-
             bundlePutData.putString("login_status", login_status);
             bundlePutData.putString("login_message", login_message);
 
-            if (login_status == "1") {
+            //if (login_status == "1") {
                 link = resultObject.getString("link");
+                //Log.d("link", link);
                 bundlePutData.putString("link", link);
-            }
+            //}
 
             intent.putExtra("Login_result", bundlePutData);
 

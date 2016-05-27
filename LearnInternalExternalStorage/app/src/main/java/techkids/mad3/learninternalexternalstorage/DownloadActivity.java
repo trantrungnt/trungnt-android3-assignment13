@@ -26,7 +26,7 @@ public class DownloadActivity extends AppCompatActivity implements View.OnClickL
     private Button btnDownloadMusic, btnDownloadPicture;
     private EditText editTextDownloadMusic, editTextDownloadPicture;
     private SharedPreferences sharedPreferences;
-    private String email, password, path, login_status;
+    private String email, password, path, login_status, link;
     private TextView tvDisplayMyAccount;
     private BroadcastReceiver broadcastReceiver;
     private Bundle getBundleData, bundlePutData;
@@ -45,7 +45,7 @@ public class DownloadActivity extends AppCompatActivity implements View.OnClickL
     {
         super.onResume();
         initJsonService();
-        downloadFromLinkFile();
+        downloadFromLinkFileBroadReceive();
     }
 
 
@@ -131,14 +131,17 @@ public class DownloadActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
-    private void downloadFromLinkFile()
+    private void downloadFromLinkFileBroadReceive()
     {
         broadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
                 getBundleData = intent.getBundleExtra("Login_result");
                 login_status = getBundleData.getString("login_status");
+                link = getBundleData.getString("link");
+
                 Log.d("Download Activity", login_status);
+                Log.d("Link Download Activity", link);
             }
         };
 
