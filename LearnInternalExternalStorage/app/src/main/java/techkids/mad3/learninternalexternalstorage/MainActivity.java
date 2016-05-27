@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnDownload.setOnClickListener(this);
 
         tvDisplayMyAccount = (TextView) this.findViewById(R.id.tvDislplayAccountName);
+        tvDisplayMyAccount.setVisibility(View.INVISIBLE);
     }
 
 
@@ -81,6 +82,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             sharedPreferences = getSharedPreferences(Helper.fileName, MODE_PRIVATE);
             email = sharedPreferences.getString("email", null);
             tvDisplayMyAccount.setText(email);
+            tvDisplayMyAccount.setVisibility(View.VISIBLE);
             btnDownload.setVisibility(View.VISIBLE);
             btnLogin.setVisibility(View.GONE);
         }
