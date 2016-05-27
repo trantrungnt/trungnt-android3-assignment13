@@ -1,5 +1,7 @@
 package techkids.mad3.learninternalexternalstorage;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -20,7 +22,6 @@ public class DownloadActivity extends AppCompatActivity implements View.OnClickL
     private SharedPreferences sharedPreferences;
     private String email, path;
     private TextView tvDisplayMyAccount;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +50,10 @@ public class DownloadActivity extends AppCompatActivity implements View.OnClickL
         switch (id)
         {
             case R.id.btn_download_music:
+                showAlertDialog("INFORMATION ...", Helper.alertDownload);
                 break;
             case R.id.btn_download_picture:
+                showAlertDialog("INFORMATION ...", Helper.alertDownload);
                 break;
         }
     }
@@ -66,7 +69,7 @@ public class DownloadActivity extends AppCompatActivity implements View.OnClickL
         return check;
     }
 
-    //load MyAccount: email in UI Main Activity
+    //load MyAccount: email in UI Download Activity
     private void displayMyAccount() {
         path = "/data/data/" + getPackageName() + "/shared_prefs/" + Helper.fileName + ".xml";
         if (isFileExist(path)) {
@@ -74,5 +77,22 @@ public class DownloadActivity extends AppCompatActivity implements View.OnClickL
             email = sharedPreferences.getString("email", null);
             tvDisplayMyAccount.setText(email);
         }
+    }
+
+    private void showAlertDialog (String titleDialog, String contentDialog)
+    {
+        AlertDialog.Builder builder =
+                new AlertDialog.Builder(this, R.style.AppCompatAlertDialogStyle);
+        builder.setTitle(titleDialog);
+        builder.setMessage(contentDialog);
+
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        builder.show();
     }
 }
