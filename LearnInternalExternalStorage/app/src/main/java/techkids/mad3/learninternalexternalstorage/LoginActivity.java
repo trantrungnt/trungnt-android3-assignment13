@@ -30,7 +30,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private Intent getIntentData, intentData;
     private String email, password, login_status, login_message;
     private BroadcastReceiver broadcastReceiver;
-    private static final int READ_BLOCK_SIZE = 100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +69,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                   case "1":
                       showAlertDialog("INFORMATION ...", login_message);
-                      //saveMyAccountSharePreferences(context, "MyAccountPrivate", email, password);
+                      saveMyAccountSharePreferences(context, "MyAccountPrivate", email, password);
                       String path = "/data/data/" + getPackageName() +  "/shared_prefs/" + Helper.fileName +".xml";
                       Log.d("text", String.valueOf(isFileExist(path)));
 
@@ -123,49 +122,24 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         builder.show();
     }
 
-    private void storageAccount(Context context, String filename, String email, String password)
-    {
-        File file;
-        file = new File(context.getFilesDir(), filename);
-        //Log.d("File gi day: ", file.getAbsoluteFile().toString());
-
-        FileOutputStream outputStream;
-
-        try {
-            outputStream = openFileOutput(file.getAbsoluteFile().toString(), Context.MODE_PRIVATE);
-            outputStream.write(email.getBytes());
-            outputStream.write("-".getBytes());
-            outputStream.write(password.getBytes());
-            outputStream.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void readFile(String filename)
-    {
-        //reading text from file
-        try {
-            FileInputStream fileIn = openFileInput(filename);
-            InputStreamReader InputRead= new InputStreamReader(fileIn);
-
-            char[] inputBuffer= new char[READ_BLOCK_SIZE];
-            String s="";
-            int charRead;
-
-            while ((charRead=InputRead.read(inputBuffer))>0) {
-                // char to string conversion
-                String readstring=String.copyValueOf(inputBuffer,0,charRead);
-                s +=readstring;
-            }
-            InputRead.close();
-
-            Log.d("Read my file:", s);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
+//    private void storageAccount(Context context, String filename, String email, String password)
+//    {
+//        File file;
+//        file = new File(context.getFilesDir(), filename);
+//        //Log.d("File gi day: ", file.getAbsoluteFile().toString());
+//
+//        FileOutputStream outputStream;
+//
+//        try {
+//            outputStream = openFileOutput(file.getAbsoluteFile().toString(), Context.MODE_PRIVATE);
+//            outputStream.write(email.getBytes());
+//            outputStream.write("-".getBytes());
+//            outputStream.write(password.getBytes());
+//            outputStream.close();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     private void saveMyAccountSharePreferences(Context context, String fileName, String email, String password)
     {
