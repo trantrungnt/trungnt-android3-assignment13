@@ -11,6 +11,8 @@ import java.io.InputStreamReader;
  * Created by TrungNT on 5/27/2016.
  */
 public class DownloadService extends IntentService {
+    private static final int READ_BLOCK_SIZE = 100;
+    private String linkDownload;
 
     public DownloadService() {
         super("DownloadService");

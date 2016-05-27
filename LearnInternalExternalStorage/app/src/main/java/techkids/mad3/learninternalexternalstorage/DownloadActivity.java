@@ -28,7 +28,6 @@ public class DownloadActivity extends AppCompatActivity implements View.OnClickL
     private SharedPreferences sharedPreferences;
     private String email, password, path, login_status;
     private TextView tvDisplayMyAccount;
-    private static final int READ_BLOCK_SIZE = 100;
     private BroadcastReceiver broadcastReceiver;
     private Bundle getBundleData, bundlePutData;
     private Intent intentPutData;
