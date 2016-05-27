@@ -10,10 +10,18 @@ import android.view.View;
  */
 public class DownloadActivity extends AppCompatActivity implements View.OnClickListener {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.actvity_download);
+        initComponent();
+    }
+
+
+    private void initComponent()
+    {
+
     }
 
     @Override
