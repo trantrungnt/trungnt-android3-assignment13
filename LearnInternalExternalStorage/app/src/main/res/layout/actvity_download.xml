@@ -40,5 +40,33 @@
         android:textColor="@color/white"
         android:background="@color/primary_darker"
         android:padding="12dp"
-        android:text="Login"/>
+        android:text="Download"/>
+
+    <EditText android:id="@+id/editDownloadPicture"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/btn_download_music"
+        android:textColorHighlight="@color/white"
+        android:textColor="@color/white"
+        android:textColorHint="@color/iron"
+        android:inputType="textEmailAddress"
+        android:textSize="12sp"
+        android:backgroundTint="@color/white"
+        android:hint="Enter to download your picture file" />
+
+    <Button
+        android:id="@+id/btn_download_picture"
+        android:layout_below="@id/btn_download_music"
+        android:layout_toRightOf="@id/editDownloadPicture"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="24dp"
+        android:textColor="@color/white"
+        android:background="@color/primary_darker"
+        android:padding="12dp"
+        android:text="Download"/>
 </RelativeLayout>
