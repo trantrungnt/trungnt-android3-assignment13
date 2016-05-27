@@ -30,7 +30,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private Intent getIntentData, intentData;
     private String email, password, login_status, login_message;
     private BroadcastReceiver broadcastReceiver;
-    private static final String storageMyAccount = "STORAGE_ACCOUNT";
     private static final int READ_BLOCK_SIZE = 100;
 
     @Override
@@ -72,7 +71,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                   case "1":
                       showAlertDialog("INFORMATION ...", login_message);
                       //saveMyAccountSharePreferences(context, "MyAccountPrivate", email, password);
-                      String path = "/data/data/" + getPackageName() +  "/shared_prefs/" + "MyAccountPrivate.xml";
+                      String path = "/data/data/" + getPackageName() +  "/shared_prefs/" + Helper.fileName +".xml";
                       Log.d("text", String.valueOf(isFileExist(path)));
 
                       break;

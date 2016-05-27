@@ -1,6 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/primary"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/tvDislplayAccountName"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="10dp"
+        android:layout_gravity="end"
+        android:textColor="@color/iron"
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <EditText android:id="@+id/editDownloadMusic"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/tvDislplayAccountName"
+        android:textColorHighlight="@color/white"
+        android:textColor="@color/white"
+        android:textColorHint="@color/iron"
+        android:inputType="textEmailAddress"
+        android:textSize="12sp"
+        android:backgroundTint="@color/white"
+        android:hint="Enter to download your music file" />
+
+    <Button
+        android:id="@+id/btn_download_music"
+        android:layout_below="@id/tvDislplayAccountName"
+        android:layout_toRightOf="@id/editDownloadMusic"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="24dp"
+        android:textColor="@color/white"
+        android:background="@color/primary_darker"
+        android:padding="12dp"
+        android:text="Login"/>
+</RelativeLayout>
