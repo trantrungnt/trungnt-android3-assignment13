@@ -26,7 +26,7 @@ import java.net.URLConnection;
 public class DownloadService extends IntentService {
     private static final int READ_BLOCK_SIZE = 100;
     private String linkDownload;
-    private Bundle getBundleData;
+    private Bundle getBundleData, putBundleData;
 
     public DownloadService() {
         super("DownloadService");
@@ -37,7 +37,8 @@ public class DownloadService extends IntentService {
         getBundleData = intent.getExtras();
         linkDownload = getBundleData.getString("link");
         Log.d("Receive link download", linkDownload);
-        readContentFileFromURL(linkDownload);
+
+        Log.d("text", readContentFileFromURL(linkDownload));
     }
 
     private void readFile(String filename)
@@ -74,20 +75,21 @@ public class DownloadService extends IntentService {
         }
     }
 
-    private void readContentFileFromURL(String urlPath) {
+    private String readContentFileFromURL(String urlPath) {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
+
+        String stringText = "";
         URL textUrl;
         try {
             textUrl = new URL(urlPath);
             BufferedReader bufferReader = new BufferedReader(new InputStreamReader(textUrl.openStream()));
             String StringBuffer;
-            String stringText = "";
+
             while ((StringBuffer = bufferReader.readLine()) != null) {
                 stringText += StringBuffer;
             }
             bufferReader.close();
-            Log.d("text", stringText);
 
         } catch (MalformedURLException e) {
             // TODO Auto-generated catch block
@@ -97,6 +99,6 @@ public class DownloadService extends IntentService {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
+        return stringText;
     }
 }
