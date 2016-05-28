@@ -44,9 +44,10 @@ public class DownloadActivity extends AppCompatActivity implements View.OnClickL
     private SharedPreferences sharedPreferences;
     private String email, password, path, login_status, link;
     private TextView tvDisplayMyAccount;
-    private BroadcastReceiver broadcastReceiver;
+    private BroadcastReceiver broadcastReceiver, broadcastReceiverDownloadService;
     private Bundle getBundleData, bundlePutData;
     private Intent intentPutData;
+    private String urlMusic, urlPicture;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -160,6 +161,7 @@ public class DownloadActivity extends AppCompatActivity implements View.OnClickL
                 Log.d("Link Download Activity", link);
 
                 initDownloadService(link);
+                broadCastReceiveListenDownloadService();
             }
         };
 
@@ -175,5 +177,20 @@ public class DownloadActivity extends AppCompatActivity implements View.OnClickL
         startService(intentPutData);
     }
 
+    private void broadCastReceiveListenDownloadService()
+    {
+        broadcastReceiverDownloadService = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+               getBundleData = intent.getBundleExtra("link_result");
+               urlMusic = getBundleData.getString("URLMusic");
+               urlPicture = getBundleData.getString("URLPicture");
+               editTextDownloadMusic.setText(urlMusic);
+               editTextDownloadPicture.setText(urlPicture);
+            }
+        };
+
+        registerReceiver(broadcastReceiverDownloadService, new IntentFilter("FILTER_ACNTION_DOWLOAD"));
+    }
 
 }

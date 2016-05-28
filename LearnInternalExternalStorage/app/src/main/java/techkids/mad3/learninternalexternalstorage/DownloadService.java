@@ -54,12 +54,12 @@ public class DownloadService extends IntentService {
 
     private void putDataURL(String urlMusic, String urlPicture)
     {
-        putIntentData = new Intent(DownloadService.this, DownloadActivity.class);
+        putIntentData = new Intent();
         putBundleData = new Bundle();
         putBundleData.putString("URLMusic", urlMusic);
         putBundleData.putString("URLPicture", urlPicture);
         putIntentData.putExtra("link_result", putBundleData);
-        putIntentData.setAction("FILTER_ACTION_DOWNLOAD");
+        putIntentData.setAction("FILTER_ACNTION_DOWLOAD");
         sendBroadcast(putIntentData);
     }
 
