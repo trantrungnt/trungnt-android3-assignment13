@@ -38,3 +38,4 @@ Nhiệm vụ của ta là đọc cái json đó. Nếu login đéo đc thì báo
 + [Android shared preferences Turtorial](http://www.tutorialspoint.com/android/android_shared_preferences.htm)
 + [Share Preferences - Example](http://androidopentutorials.com/android-sharedpreferences-tutorial-and-example/)
 + [Android temporarily writing and read files to cache directory](http://wptrafficanalyzer.in/blog/android-temporarily-writing-and-reading-files-to-cache-directory/)
++ [Android save downloading file locally](http://jmsliu.com/1954/android-save-downloading-file-locally.html)
