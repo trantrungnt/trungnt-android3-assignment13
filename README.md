@@ -41,3 +41,4 @@ Nhiệm vụ của ta là đọc cái json đó. Nếu login đéo đc thì báo
 + [Android save downloading file locally](http://jmsliu.com/1954/android-save-downloading-file-locally.html)
 + [Read text file from internet in Android](http://www.worldbestlearningcenter.com/tips/Read-text-file-from-internet-in-android.htm)
 + [Fix Error Network On Main Thread Exception](http://android-er.blogspot.com/2012/04/androidosnetworkonmainthreadexception.html)
++ [Tham khảo saving file](http://www.101apps.co.za/articles/using-android-s-file-system-for-saving-application-data-part-1-saving-files.html)
