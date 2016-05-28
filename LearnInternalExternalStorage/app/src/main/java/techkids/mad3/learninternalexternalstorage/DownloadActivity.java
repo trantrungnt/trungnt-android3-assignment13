@@ -19,16 +19,23 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import org.xmlpull.v1.XmlPullParser;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -49,6 +56,7 @@ public class DownloadActivity extends AppCompatActivity implements View.OnClickL
     private Intent intentPutData;
     private String urlMusic, urlPicture;
     private String fileNameDownload = Helper.alertDownload + ".txt";
+    private SharedPreferences preferencesEditor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -192,28 +200,33 @@ public class DownloadActivity extends AppCompatActivity implements View.OnClickL
 
                 path = context.getCacheDir().getAbsolutePath() + "/" + fileNameDownload;
 
-                if (!isFileExist(path))
-                    saveTempFile(context, urlMusic, urlPicture);
+                //if (!isFileExist(path))
+                saveTempFile(context, "test.txt");
             }
         };
 
         registerReceiver(broadcastReceiverDownloadService, new IntentFilter("FILTER_ACNTION_DOWLOAD"));
     }
 
-    private void saveTempFile(Context context, String urlMusic, String urlPicture) {
-        File file;
-        FileOutputStream outputStream;
+    private void saveTempFile(Context context, String fileName){
+        try{
+            //create a temp file
+            //File temp = File.createTempFile(fileName, ".txt");
+            File temp = new File(context.getCacheDir(), fileName);
 
-        try {
-            file = new File(context.getCacheDir(), fileNameDownload);
-            outputStream = openFileOutput(fileNameDownload, Context.MODE_PRIVATE);
-            outputStream.write(urlMusic.getBytes());
-            outputStream.write(urlPicture.getBytes());
-            outputStream.close();
-        }
-        catch(IOException e){
-            Log.d("Error", e.toString());
+            //write it
+            BufferedWriter bw = new BufferedWriter(new FileWriter(temp));
+            bw.write("This is the temporary file content");
+            bw.close();
+
+            System.out.println("Done");
+
+        }catch(IOException e){
+
+            e.printStackTrace();
+
         }
     }
+
 
 }
