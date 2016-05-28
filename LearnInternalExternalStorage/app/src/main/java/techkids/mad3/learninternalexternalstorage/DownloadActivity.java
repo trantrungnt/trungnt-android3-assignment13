@@ -164,10 +164,6 @@ public class DownloadActivity extends AppCompatActivity implements View.OnClickL
 
                 initDownloadService(link);
                 broadCastReceiveListenDownloadService();
-                path = context.getCacheDir().getAbsolutePath() + "/" + fileNameDownload;
-
-                if (!isFileExist(path))
-                    saveTempFile(context, path);
             }
         };
 
@@ -193,20 +189,26 @@ public class DownloadActivity extends AppCompatActivity implements View.OnClickL
                urlPicture = getBundleData.getString("URLPicture");
                editTextDownloadMusic.setText(urlMusic);
                editTextDownloadPicture.setText(urlPicture);
+
+                path = context.getCacheDir().getAbsolutePath() + "/" + fileNameDownload;
+
+                if (!isFileExist(path))
+                    saveTempFile(context, urlMusic, urlPicture);
             }
         };
 
         registerReceiver(broadcastReceiverDownloadService, new IntentFilter("FILTER_ACNTION_DOWLOAD"));
     }
 
-    public void saveTempFile(Context context, String url) {
+    private void saveTempFile(Context context, String urlMusic, String urlPicture) {
         File file;
         FileOutputStream outputStream;
 
         try {
             file = new File(context.getCacheDir(), fileNameDownload);
             outputStream = openFileOutput(fileNameDownload, Context.MODE_PRIVATE);
-            outputStream.write("".getBytes());
+            outputStream.write(urlMusic.getBytes());
+            outputStream.write(urlPicture.getBytes());
             outputStream.close();
         }
         catch(IOException e){
