@@ -30,6 +30,8 @@ public class DownloadService extends IntentService {
     private String contentURL, urlMusic, urlPicture;
     private int endURLMusic;
     private Intent putIntentData;
+    private String fileNameDownload = Helper.fileNameDownload + ".txt";
+    private String pathFileCache;
 
     public DownloadService() {
         super("DownloadService");
@@ -42,14 +44,18 @@ public class DownloadService extends IntentService {
         contentURL = readContentFileFromURL(linkDownload);
         endURLMusic = contentURL.indexOf(".mp3");
         urlMusic = contentURL.substring(0, endURLMusic + 4);
-        urlPicture = contentURL.substring(endURLMusic +4);
+        urlPicture = contentURL.substring(endURLMusic + 4);
 
         Log.d("URL Music", urlMusic);
         Log.d("URL Picture", urlPicture);
         Log.d("Receive link download", linkDownload);
         Log.d("text", readContentFileFromURL(linkDownload));
+        Log.d("PathCacheDS", getCacheDir().getAbsolutePath() + "/" + fileNameDownload);
 
         putDataURL(urlMusic, urlPicture);
+
+        pathFileCache = getCacheDir().getAbsolutePath() + "/" + fileNameDownload;
+        getDataFromFileCache(pathFileCache);
     }
 
     private void putDataURL(String urlMusic, String urlPicture)
@@ -87,7 +93,6 @@ public class DownloadService extends IntentService {
         }
     }
 
-
     private String readContentFileFromURL(String urlPath) {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
@@ -124,5 +129,16 @@ public class DownloadService extends IntentService {
             check = true;
 
         return check;
+    }
+
+    private void getDataFromFileCache(String path)
+    {
+        if (isFileExist(path)) {
+
+            Log.d("FileStatus", "File Exist");
+        }
+        else {
+            Log.d("FileStatus", "File not Exist");
+        }
     }
 }
