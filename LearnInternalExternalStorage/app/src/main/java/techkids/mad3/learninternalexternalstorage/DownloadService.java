@@ -87,15 +87,6 @@ public class DownloadService extends IntentService {
         }
     }
 
-    public void saveTempFile(Context context, String url) {
-        try {
-            String fileName = Uri.parse(url).getLastPathSegment();
-            File.createTempFile(fileName, null, context.getCacheDir());
-        }
-        catch(IOException e){
-            Log.d("Error", e.toString());
-        }
-    }
 
     private String readContentFileFromURL(String urlPath) {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -122,5 +113,16 @@ public class DownloadService extends IntentService {
             e.printStackTrace();
         }
         return stringText;
+    }
+
+    //check file Exist
+    private boolean isFileExist(String path)
+    {
+        boolean check=false;
+        File file = new File(path);
+        if (file.exists())
+            check = true;
+
+        return check;
     }
 }

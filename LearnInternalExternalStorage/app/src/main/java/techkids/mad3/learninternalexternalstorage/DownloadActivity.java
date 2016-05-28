@@ -48,6 +48,7 @@ public class DownloadActivity extends AppCompatActivity implements View.OnClickL
     private Bundle getBundleData, bundlePutData;
     private Intent intentPutData;
     private String urlMusic, urlPicture;
+    private String fileNameDownload = Helper.alertDownload + ".txt";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -159,9 +160,14 @@ public class DownloadActivity extends AppCompatActivity implements View.OnClickL
 
                 Log.d("Download Activity", login_status);
                 Log.d("Link Download Activity", link);
+                Log.d("path cache", context.getCacheDir().getAbsolutePath());
 
                 initDownloadService(link);
                 broadCastReceiveListenDownloadService();
+                path = context.getCacheDir().getAbsolutePath() + "/" + fileNameDownload;
+
+                if (!isFileExist(path))
+                    saveTempFile(context, path);
             }
         };
 
@@ -191,6 +197,21 @@ public class DownloadActivity extends AppCompatActivity implements View.OnClickL
         };
 
         registerReceiver(broadcastReceiverDownloadService, new IntentFilter("FILTER_ACNTION_DOWLOAD"));
+    }
+
+    public void saveTempFile(Context context, String url) {
+        File file;
+        FileOutputStream outputStream;
+
+        try {
+            file = new File(context.getCacheDir(), fileNameDownload);
+            outputStream = openFileOutput(fileNameDownload, Context.MODE_PRIVATE);
+            outputStream.write("".getBytes());
+            outputStream.close();
+        }
+        catch(IOException e){
+            Log.d("Error", e.toString());
+        }
     }
 
 }
