@@ -159,7 +159,7 @@ public class DownloadActivity extends AppCompatActivity implements View.OnClickL
                 Log.d("Download Activity", login_status);
                 Log.d("Link Download Activity", link);
 
-                saveTempFile(context, link);
+                initDownloadService(link);
             }
         };
 
@@ -173,32 +173,6 @@ public class DownloadActivity extends AppCompatActivity implements View.OnClickL
         bundlePutData.putString("link", link);
         intentPutData.putExtras(bundlePutData);
         startService(intentPutData);
-    }
-
-    public void saveTempFile(Context context, String urlPath) {
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
-        URL textUrl;
-        try {
-            textUrl = new URL(urlPath);
-            BufferedReader bufferReader = new BufferedReader(new InputStreamReader(textUrl.openStream()));
-            String StringBuffer;
-            String stringText = "";
-            while ((StringBuffer = bufferReader.readLine()) != null) {
-                stringText += StringBuffer;
-            }
-            bufferReader.close();
-           Log.d("text", stringText);
-
-        } catch (MalformedURLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
     }
 
 }

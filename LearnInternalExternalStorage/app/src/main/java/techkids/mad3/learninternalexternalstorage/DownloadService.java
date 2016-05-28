@@ -5,15 +5,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.util.Log;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
@@ -32,9 +35,9 @@ public class DownloadService extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
         getBundleData = intent.getExtras();
-        //linkDownload = getBundleData.getString("link");
-        //Log.d("Receive link download", linkDownload);
-
+        linkDownload = getBundleData.getString("link");
+        Log.d("Receive link download", linkDownload);
+        readContentFileFromURL(linkDownload);
     }
 
     private void readFile(String filename)
@@ -69,5 +72,31 @@ public class DownloadService extends IntentService {
         catch(IOException e){
             Log.d("Error", e.toString());
         }
+    }
+
+    private void readContentFileFromURL(String urlPath) {
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+        URL textUrl;
+        try {
+            textUrl = new URL(urlPath);
+            BufferedReader bufferReader = new BufferedReader(new InputStreamReader(textUrl.openStream()));
+            String StringBuffer;
+            String stringText = "";
+            while ((StringBuffer = bufferReader.readLine()) != null) {
+                stringText += StringBuffer;
+            }
+            bufferReader.close();
+            Log.d("text", stringText);
+
+        } catch (MalformedURLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
     }
 }
