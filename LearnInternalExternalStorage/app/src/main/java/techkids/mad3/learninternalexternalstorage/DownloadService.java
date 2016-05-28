@@ -27,6 +27,8 @@ public class DownloadService extends IntentService {
     private static final int READ_BLOCK_SIZE = 100;
     private String linkDownload;
     private Bundle getBundleData, putBundleData;
+    private String contentURL, urlMusic, urlPicture;
+    private int endURLMusic, startURLPicture;
 
     public DownloadService() {
         super("DownloadService");
@@ -36,8 +38,12 @@ public class DownloadService extends IntentService {
     protected void onHandleIntent(Intent intent) {
         getBundleData = intent.getExtras();
         linkDownload = getBundleData.getString("link");
-        Log.d("Receive link download", linkDownload);
+        contentURL = readContentFileFromURL(linkDownload);
+        endURLMusic = contentURL.indexOf(".mp3");
+        urlMusic = contentURL.substring(0, endURLMusic + 4);
 
+        Log.d("URL Music", urlMusic);
+        Log.d("Receive link download", linkDownload);
         Log.d("text", readContentFileFromURL(linkDownload));
     }
 
