@@ -29,6 +29,7 @@ public class DownloadService extends IntentService {
     private Bundle getBundleData, putBundleData;
     private String contentURL, urlMusic, urlPicture;
     private int endURLMusic;
+    private Intent putIntentData;
 
     public DownloadService() {
         super("DownloadService");
@@ -47,6 +48,19 @@ public class DownloadService extends IntentService {
         Log.d("URL Picture", urlPicture);
         Log.d("Receive link download", linkDownload);
         Log.d("text", readContentFileFromURL(linkDownload));
+
+        putDataURL(urlMusic, urlPicture);
+    }
+
+    private void putDataURL(String urlMusic, String urlPicture)
+    {
+        putIntentData = new Intent(DownloadService.this, DownloadActivity.class);
+        putBundleData = new Bundle();
+        putBundleData.putString("URLMusic", urlMusic);
+        putBundleData.putString("URLPicture", urlPicture);
+        putIntentData.putExtra("link_result", putBundleData);
+        putIntentData.setAction("FILTER_ACTION_DOWNLOAD");
+        sendBroadcast(putIntentData);
     }
 
     private void readFile(String filename)
