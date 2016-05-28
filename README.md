@@ -40,3 +40,4 @@ Nhiệm vụ của ta là đọc cái json đó. Nếu login đéo đc thì báo
 + [Android temporarily writing and read files to cache directory](http://wptrafficanalyzer.in/blog/android-temporarily-writing-and-reading-files-to-cache-directory/)
 + [Android save downloading file locally](http://jmsliu.com/1954/android-save-downloading-file-locally.html)
 + [Read text file from internet in Android](http://www.worldbestlearningcenter.com/tips/Read-text-file-from-internet-in-android.htm)
++ [Fix Error Network On Main Thread Exception](http://android-er.blogspot.com/2012/04/androidosnetworkonmainthreadexception.html)
