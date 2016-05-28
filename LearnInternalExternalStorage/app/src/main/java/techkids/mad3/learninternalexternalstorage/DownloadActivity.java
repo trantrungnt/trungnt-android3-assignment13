@@ -55,7 +55,7 @@ public class DownloadActivity extends AppCompatActivity implements View.OnClickL
     private Bundle getBundleData, bundlePutData;
     private Intent intentPutData;
     private String urlMusic, urlPicture;
-    private String fileNameDownload = Helper.alertDownload + ".txt";
+    private String fileNameDownload = Helper.fileNameDownload + ".txt";
     private SharedPreferences preferencesEditor;
 
     @Override
@@ -200,15 +200,16 @@ public class DownloadActivity extends AppCompatActivity implements View.OnClickL
 
                 path = context.getCacheDir().getAbsolutePath() + "/" + fileNameDownload;
 
-                //if (!isFileExist(path))
-                saveTempFile(context, "test.txt");
+                if (!isFileExist(path))
+                        saveTempFile(context, fileNameDownload, urlMusic, urlPicture);
+                Log.d("Path:", path);
             }
         };
 
         registerReceiver(broadcastReceiverDownloadService, new IntentFilter("FILTER_ACNTION_DOWLOAD"));
     }
 
-    private void saveTempFile(Context context, String fileName){
+    private void saveTempFile(Context context, String fileName, String urlMusic, String urlPicture){
         try{
             //create a temp file
             //File temp = File.createTempFile(fileName, ".txt");
@@ -216,15 +217,13 @@ public class DownloadActivity extends AppCompatActivity implements View.OnClickL
 
             //write it
             BufferedWriter bw = new BufferedWriter(new FileWriter(temp));
-            bw.write("This is the temporary file content");
+            bw.write(urlMusic + "\n" + urlPicture);
             bw.close();
 
             System.out.println("Done");
 
         }catch(IOException e){
-
             e.printStackTrace();
-
         }
     }
 
