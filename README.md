@@ -33,7 +33,7 @@ Nhiệm vụ của ta là đọc cái json đó. Nếu login đéo đc thì báo
 + [File Path for Android when using Emulator](stackoverflow.com/questions/10703619/file-path-for-android-when-using-emulator)
 + [Storage situation internal storage](https://commonsware.com/blog/2014/04/07/storage-situation-internal-storage.html)
 + [How to Correctly Store App-Specific Files in Android](http://www.grokkingandroid.com/how-to-correctly-store-app-specific-files-in-android/)
-+ [How can I read file in Android](How can I read a text file in Android?)
++ [How can to write data to temporary file in Java](http://www.mkyong.com/java/how-to-write-data-to-temporary-file-in-java/)
 + [Read and Write File text in Android - Example](http://www.androidinterview.com/android-internal-storage-read-and-write-text-file-example/)
 + [Android shared preferences Turtorial](http://www.tutorialspoint.com/android/android_shared_preferences.htm)
 + [Share Preferences - Example](http://androidopentutorials.com/android-sharedpreferences-tutorial-and-example/)
