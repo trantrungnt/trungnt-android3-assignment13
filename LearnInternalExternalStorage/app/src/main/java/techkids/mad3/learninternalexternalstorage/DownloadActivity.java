@@ -7,7 +7,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.res.AssetManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.NetworkOnMainThreadException;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -15,9 +19,21 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Serializable;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 
 /**
  * Created by TrungNT on 5/26/2016.
@@ -142,10 +158,47 @@ public class DownloadActivity extends AppCompatActivity implements View.OnClickL
 
                 Log.d("Download Activity", login_status);
                 Log.d("Link Download Activity", link);
+
+                saveTempFile(context, link);
             }
         };
 
         registerReceiver(broadcastReceiver, new IntentFilter("FILTER_ACTION_LOGIN"));
+    }
+
+    private void initDownloadService(String link)
+    {
+        intentPutData = new Intent(DownloadActivity.this, DownloadService.class);
+        bundlePutData = new Bundle();
+        bundlePutData.putString("link", link);
+        intentPutData.putExtras(bundlePutData);
+        startService(intentPutData);
+    }
+
+    public void saveTempFile(Context context, String urlPath) {
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+        URL textUrl;
+        try {
+            textUrl = new URL(urlPath);
+            BufferedReader bufferReader = new BufferedReader(new InputStreamReader(textUrl.openStream()));
+            String StringBuffer;
+            String stringText = "";
+            while ((StringBuffer = bufferReader.readLine()) != null) {
+                stringText += StringBuffer;
+            }
+            bufferReader.close();
+           Log.d("text", stringText);
+
+        } catch (MalformedURLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
     }
 
 }

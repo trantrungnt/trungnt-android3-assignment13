@@ -25,6 +25,7 @@
         </activity>
 
         <service android:name=".JsonService"></service>
+        <service android:name=".DownloadService"></service>
     </application>
 
 </manifest>

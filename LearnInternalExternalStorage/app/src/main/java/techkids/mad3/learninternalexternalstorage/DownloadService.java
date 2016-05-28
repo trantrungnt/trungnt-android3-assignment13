@@ -4,6 +4,7 @@ import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.util.Log;
 
 import java.io.BufferedInputStream;
@@ -22,6 +23,7 @@ import java.net.URLConnection;
 public class DownloadService extends IntentService {
     private static final int READ_BLOCK_SIZE = 100;
     private String linkDownload;
+    private Bundle getBundleData;
 
     public DownloadService() {
         super("DownloadService");
@@ -29,6 +31,9 @@ public class DownloadService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
+        getBundleData = intent.getExtras();
+        //linkDownload = getBundleData.getString("link");
+        //Log.d("Receive link download", linkDownload);
 
     }
 
