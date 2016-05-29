@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.StrictMode;
 import android.util.Log;
 
@@ -70,8 +71,9 @@ public class DownloadService extends IntentService {
         sendBroadcast(putIntentData);
     }
 
-    private void readFile(String filename)
+    private String readFile(String filename)
     {
+        String contentFile = "";
         //reading text from file
         try {
             FileInputStream fileIn = openFileInput(filename);
@@ -87,11 +89,14 @@ public class DownloadService extends IntentService {
                 s +=readstring;
             }
             InputRead.close();
+            contentFile = s;
 
-            Log.d("Read my file:", s);
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        Log.d("Read my file:", s);
+        return contentFile;
     }
 
     private String readContentFileFromURL(String urlPath) {
@@ -159,6 +164,52 @@ public class DownloadService extends IntentService {
 
         try {
             URL url = new URL(link);
+            httpURLConnection = (HttpURLConnection) url.openConnection();
+            int statusCode = httpURLConnection.getResponseCode();
+            if (statusCode == HttpURLConnection.HTTP_OK) {
+                inputStream = new BufferedInputStream(httpURLConnection.getInputStream());
+                byte data[] = new byte[1024];
+
+                int count;
+                while ((count = inputStream.read(data)) != -1) {
+                    outputStream.write(data, 0, count);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (null != inputStream) {
+                try {
+                    inputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (null != outputStream) {
+                try {
+                    outputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    private void downloadToExternalStorage(String downloadLink) {
+        downloadLink = "http://nhac.vui.vn/download.php?id=4337";
+
+        HttpURLConnection httpURLConnection;
+        InputStream inputStream = null;
+        FileOutputStream outputStream = null;
+        File file = null;
+        try {
+            file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC), Helper.EXTERNAL_STORAGE_FILE_NAME);
+            outputStream = new FileOutputStream(file);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            URL url = new URL(downloadLink);
             httpURLConnection = (HttpURLConnection) url.openConnection();
             int statusCode = httpURLConnection.getResponseCode();
             if (statusCode == HttpURLConnection.HTTP_OK) {
