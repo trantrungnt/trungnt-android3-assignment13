@@ -13,7 +13,9 @@ import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -34,6 +36,8 @@ public class DownloadService extends IntentService {
     private Intent putIntentData;
     private String fileNameDownload = Helper.fileNameDownload + ".txt";
     private String pathFileCache;
+    private String contentFile;
+    private int indexNull;
 
     public DownloadService() {
         super("DownloadService");
@@ -71,31 +75,25 @@ public class DownloadService extends IntentService {
         sendBroadcast(putIntentData);
     }
 
-    private String readFile(String filename)
+    private String readFile(String path)
     {
-        String contentFile = "";
-        //reading text from file
+        File tempFile=null;
+        tempFile = new File(path);
+        String strLine="";
+
         try {
-            FileInputStream fileIn = openFileInput(filename);
-            InputStreamReader InputRead= new InputStreamReader(fileIn);
+            FileReader fReader = new FileReader(tempFile);
+            BufferedReader bReader = new BufferedReader(fReader);
 
-            char[] inputBuffer= new char[READ_BLOCK_SIZE];
-            String s="";
-            int charRead;
-
-            while ((charRead=InputRead.read(inputBuffer))>0) {
-                // char to string conversion
-                String readstring=String.copyValueOf(inputBuffer,0,charRead);
-                s +=readstring;
+            /** Reading the contents of the file: line by line */
+            while( (strLine=bReader.readLine()) != null  ){
+                contentFile += strLine;
             }
-            InputRead.close();
-            contentFile = s;
-
-        } catch (Exception e) {
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }catch(IOException e){
             e.printStackTrace();
         }
-
-        Log.d("Read my file:", s);
         return contentFile;
     }
 
@@ -140,7 +138,15 @@ public class DownloadService extends IntentService {
     private void getDataFromFileCache(String path)
     {
         if (isFileExist(path)) {
-
+            contentFile = readFile(path);
+            endURLMusic = contentFile.indexOf(".mp3");
+            urlPicture = contentFile.substring(endURLMusic + 4);
+            urlMusic = contentFile.substring(4, endURLMusic);
+            downloadToExternalStorage(urlMusic);
+            downloadToInternalStorage(urlPicture);
+            Log.d("ContentRFURL", urlMusic);
+            Log.d("ContentRFURL", urlPicture);
+            Log.d("ContentRF", readFile(path));
             Log.d("FileStatus", "File Exist");
         }
         else {
