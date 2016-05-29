@@ -13,9 +13,11 @@ Nhiệm vụ của ta là đọc cái json đó. Nếu login đéo đc thì báo
 + [Xem tại đây](https://github.com/trantrungnt/LearnStorargeData)
 + [Học sử dụng ADB, cấu hình để xem thư mục Package trong máy ảo Genymotion](https://youtu.be/-Gcm6Zzauh8)
 
+##Demo Chương trình
++ [Demo Login, Download in Internal Storage and External Storage version 1](https://youtu.be/1UT5fQuDn1I)
+
 ##Học sử dụng ADB trong Android
 ![Learn ADB in Android](http://i477.photobucket.com/albums/rr132/trungepu/android%20debug%20bridge_zpsxajb4vkl.jpg)
-
 
 ##Môi trường phát triển
 + Bộ công cụ Android Studio 2.1
