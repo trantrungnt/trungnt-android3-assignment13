@@ -16,6 +16,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -139,6 +140,53 @@ public class DownloadService extends IntentService {
         }
         else {
             Log.d("FileStatus", "File not Exist");
+        }
+    }
+
+
+    private void downloadToInternalStorage(String link) {
+        HttpURLConnection httpURLConnection;
+        InputStream inputStream = null;
+        FileOutputStream outputStream = null;
+        File file = null;
+        try {
+            file = new File(getFilesDir(), Helper.INTERNAL_STORAGE_FILE_NAME);
+
+            outputStream = new FileOutputStream(file);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            URL url = new URL(link);
+            httpURLConnection = (HttpURLConnection) url.openConnection();
+            int statusCode = httpURLConnection.getResponseCode();
+            if (statusCode == HttpURLConnection.HTTP_OK) {
+                inputStream = new BufferedInputStream(httpURLConnection.getInputStream());
+                byte data[] = new byte[1024];
+
+                int count;
+                while ((count = inputStream.read(data)) != -1) {
+                    outputStream.write(data, 0, count);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (null != inputStream) {
+                try {
+                    inputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (null != outputStream) {
+                try {
+                    outputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 }
